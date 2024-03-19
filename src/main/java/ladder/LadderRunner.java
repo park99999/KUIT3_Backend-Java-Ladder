@@ -6,10 +6,10 @@ public class LadderRunner {
     public LadderRunner(Row[] rows){
         this.rows = rows;
     }
-    public Position run(Position position){
+    public int run(Position position){
         for (int i = 0 ; i < rows.length; i ++){
             position = rows[i].nextPosition(position);
         }
-        return position;
+        return position.getValue();
     }
 }

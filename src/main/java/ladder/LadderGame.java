@@ -6,8 +6,9 @@ public class LadderGame {
     public LadderGame(LadderCreator ladderCreator) {
         this.ladderCreator = ladderCreator;
     }
-    public void run(Position position){
+    public int run(Position position){
         LadderRunner ladderRunner = new LadderRunner(ladderCreator.getRows());
+        return ladderRunner.run(position);
     }
 
 
