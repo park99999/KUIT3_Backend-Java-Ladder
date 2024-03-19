@@ -5,6 +5,10 @@ public class Row {
 
     public Row(NaturalNumber numberOfPerson) {
         row = new Node[numberOfPerson.get()];
+        for (int i = 0; i < numberOfPerson.get(); i++) {
+            row[i] = Node.of(Direction.center);
+        }
+
     }
 
     public void drawLine(Position lineStartPosition) {
@@ -16,9 +20,24 @@ public class Row {
     public Position nextPosition(Position position) {
 
         validatePosition(position);
+        System.out.println(Direction.left);
+        System.out.println(position.getValue());
+        System.out.println(row[position.getValue()]);
+        if (isLeft(position)) {
+            return position.prev();
+        }
+        if (isRight(position)) {
+            return position.next();
+        }
+        return position;
+    }
 
+    private boolean isLeft(Position position) {
+        return row[position.getValue()].getDirection() == Direction.left;
+    }
 
-        return row[position.getValue()].move(position);
+    private boolean isRight(Position position) {
+        return row[position.getValue()].getDirection() == Direction.right;
     }
 
     private void validateNumberOfPerson(int numberOfPerson) {

@@ -39,7 +39,7 @@ class LadderTest {
         NaturalNumber numberOfRows = NaturalNumber.of(4);
         NaturalNumber numberOfPerson = NaturalNumber.of(4);
         LadderCreator ladder = new LadderCreator(numberOfRows, numberOfPerson);
-        ladder.drawLine(Position.of(0),Position.of(0));
+        ladder.drawLine(Position.of(1),Position.of(0));
         ladder.drawLine(Position.of(1),Position.of(2));
         ladder.drawLine(Position.of(2),Position.of(1));
 

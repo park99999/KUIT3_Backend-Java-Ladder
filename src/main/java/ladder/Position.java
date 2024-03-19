@@ -11,7 +11,7 @@ public class Position {
         return new Position(position);
     }
     public int getValue() {
-        return position;
+        return this.position;
     }
     public Position prev() {
         return new Position(position - 1);

@@ -15,7 +15,7 @@ public class NaturalNumber {
         return new NaturalNumber(num);
     }
     private void check_natural(int num) {
-        if(num <= 1){
+        if(num <= 0){
             throw new IllegalArgumentException(ExceptionMessage.s_notNaturalNumber.getErrorMessage());
         }
     }

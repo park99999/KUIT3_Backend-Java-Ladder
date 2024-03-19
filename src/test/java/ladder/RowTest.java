@@ -16,7 +16,7 @@ class RowTest {
         Position position = Position.of(0);
 
         //then
-        assertEquals(0,row.nextPosition(position));
+        assertEquals(0,row.nextPosition(position).getValue());
     }
 
     @Test

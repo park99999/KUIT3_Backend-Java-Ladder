@@ -5,6 +5,9 @@ public class Node {
     private Node(Direction direction) {
         this.direction = direction;
     }
+    public Direction getDirection(){
+        return this.direction;
+    }
     public static Node of(Direction direction) {
         return new Node(direction);
     }
