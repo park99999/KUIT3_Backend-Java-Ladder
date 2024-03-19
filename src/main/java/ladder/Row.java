@@ -1,58 +1,44 @@
 package ladder;
 
 public class Row {
-    private int[] row;
+    private Node[] row;
 
-    public Row(int numberOfPerson) {
-        validateNumberOfPerson(numberOfPerson);
-        row = new int[numberOfPerson];
+    public Row(NaturalNumber numberOfPerson) {
+        row = new Node[numberOfPerson.get()];
     }
 
-    public void drawLine(int lineStartPosition) {
-        validateDrawLinePosition(lineStartPosition);
-        row[lineStartPosition] = 1;
-        row[lineStartPosition + 1] = -1;
+    public void drawLine(Position lineStartPosition) {
+        //validateDrawLinePosition(lineStartPosition);
+        row[lineStartPosition.getValue()] = Node.of(Direction.right);
+        row[lineStartPosition.next().getValue()] = Node.of(Direction.left);
     }
 
-    public int nextPosition(int position) {
+    public Position nextPosition(Position position) {
 
         validatePosition(position);
 
-        if (isLeft(position)) {
-            return position - 1;
-        }
-        if (isRight(position)) {
-            return position + 1;
-        }
 
-        return position;
-    }
-
-    private boolean isLeft(int position) {
-        return row[position] == -1;
-    }
-
-    private boolean isRight(int position) {
-        return row[position] == 1;
+        return row[position.getValue()].move(position);
     }
 
     private void validateNumberOfPerson(int numberOfPerson) {
         if(numberOfPerson < 1) {
-            throw new IllegalArgumentException("게임의 참여자 수는 1명 이상이어야 합니다.");
+            throw new IllegalArgumentException(ExceptionMessage.s_atleast_person.getErrorMessage());
         }
     }
 
-    private void validateDrawLinePosition(int lineStartPosition) {
+    /*private void validateDrawLinePosition(int lineStartPosition) {
         if(lineStartPosition < 0 || lineStartPosition >= row.length - 1 || row[lineStartPosition] == -1 || row[lineStartPosition + 1] == 1) {
-            throw new IllegalArgumentException("라인 생성이 불가능한 위치 입니다.");
+            throw new IllegalArgumentException(ExceptionMessage.s_impossible_location.getErrorMessage());
+        }
+    }*/
+
+    private void validatePosition(Position position) {
+        if(position.getValue() >= row.length || position.getValue() < 0 ) {
+            throw new IllegalArgumentException(ExceptionMessage.s_notvalid_location.getErrorMessage());
         }
     }
 
-    private void validatePosition(int position) {
-        if(position >= row.length || position < 0 ) {
-            throw new IllegalArgumentException("유효하지 않은 위치 입니다.");
-        }
-    }
 
 
 
