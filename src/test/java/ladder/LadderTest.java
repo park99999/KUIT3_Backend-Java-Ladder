@@ -72,4 +72,18 @@ class LadderTest {
 
 
     }
+    @Test
+    void 사다리_프린트_확인() {
+        //given
+        NaturalNumber numberOfRows = NaturalNumber.of(4);
+        NaturalNumber numberOfPerson = NaturalNumber.of(4);
+        LadderCreator ladder = new LadderCreator(numberOfRows, numberOfPerson);
+        ladder.drawLine(Position.of(1), Position.of(0));
+        ladder.drawLine(Position.of(1), Position.of(2));
+        ladder.drawLine(Position.of(2), Position.of(1));
+
+        LadderGame ladderGame = new LadderGame(ladder);
+        Position position = Position.of(0);
+        int resultPosition = ladderGame.run(position);
+    }
 }

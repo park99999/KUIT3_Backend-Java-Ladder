@@ -10,7 +10,16 @@ public class Row {
         }
 
     }
+    public String makeString_row(int _row, int col){
+        String s = "";
+        for(int i = 0; i < row.length; i ++){
+            if(i == col && )
+            s+= String.valueOf(n.getDirection().getVal_direction())+' ';
+        }
+        s+= '\n';
 
+        return s;
+    }
     public void drawLine(Position lineStartPosition) {
         //validateDrawLinePosition(lineStartPosition);
         row[lineStartPosition.getValue()] = Node.of(Direction.right);

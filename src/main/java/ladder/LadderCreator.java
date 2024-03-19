@@ -15,4 +15,6 @@ public class LadderCreator {
     public Row[] getRows() {
         return rows;
     }
+
+
 }
