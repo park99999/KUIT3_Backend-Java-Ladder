@@ -1,23 +1,23 @@
 package ladder;
 
 public class LadderRunner {
-    private Row[] rows;
+    private final Row[] rows;
 
     public LadderRunner(Row[] rows){
         this.rows = rows;
     }
     public int run(Position position){
         for (int i = 0 ; i < rows.length; i ++){
-            printLadder(i,position.getValue()); // before
+            printLadder(LadderPosition.of(position,i)); // before
             position = rows[i].nextPosition(position);
-            printLadder(i,position.getValue()); //after
+            printLadder(LadderPosition.of(position,i)); //after
         }
         return position.getValue();
     }
-    public void printLadder(int a, int col){
-        String s = "";
+    public void printLadder(LadderPosition lp){
+        StringBuilder s = new StringBuilder();
         for (int i=0; i < rows.length; i ++){
-            s+=rows[i].makeString_row(i,col);
+            s.append(rows[i].makeString_row(lp,i));
         }
         System.out.println(s);
     }

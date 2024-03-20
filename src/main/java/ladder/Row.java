@@ -1,7 +1,7 @@
 package ladder;
 
 public class Row {
-    private Node[] row;
+    private final Node[] row;
 
     public Row(NaturalNumber numberOfPerson) {
         row = new Node[numberOfPerson.get()];
@@ -10,15 +10,18 @@ public class Row {
         }
 
     }
-    public String makeString_row(int _row, int col){
-        String s = "";
+    public String makeString_row(LadderPosition lp, int col){
+        StringBuilder s = new StringBuilder();
         for(int i = 0; i < row.length; i ++){
-            if(i == col && )
-            s+= String.valueOf(n.getDirection().getVal_direction())+' ';
+            s.append((row[i].getDirection().getVal_direction()));
+            if(lp.getRow().getValue() ==i && col == lp.getCol()) {
+                s.append('*');
+            }
+            s.append(' ');
         }
-        s+= '\n';
+        s.append('\n');
 
-        return s;
+        return s.toString();
     }
     public void drawLine(Position lineStartPosition) {
         //validateDrawLinePosition(lineStartPosition);
@@ -29,9 +32,6 @@ public class Row {
     public Position nextPosition(Position position) {
 
         validatePosition(position);
-        System.out.println(Direction.left);
-        System.out.println(position.getValue());
-        System.out.println(row[position.getValue()]);
         if (isLeft(position)) {
             return position.prev();
         }

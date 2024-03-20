@@ -5,7 +5,7 @@ public enum Direction {
     center(0),
     left(-1);
 
-    public int val_direction;
+    public final int val_direction;
 
     Direction(int val_direction) {
         this.val_direction = val_direction;
