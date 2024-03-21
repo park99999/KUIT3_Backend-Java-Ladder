@@ -1,6 +1,7 @@
 package ladder;
 
 import model.NaturalNumber;
+import model.Position;
 
 public class Ladder {
 
@@ -14,11 +15,11 @@ public class Ladder {
         }
     }
 
-    public void drawLine(int row, int col) {
-        rows[row].drawLine(col);
+    public void drawLine(Position row, Position col) {
+        rows[row.getPosition()].drawLine(col);
     }
 
-    public int run(int position) {
+    public Position run(Position position) {
 
         for(int i = 0; i < rows.length; i++) {
             position = rows[i].nextPosition(position);

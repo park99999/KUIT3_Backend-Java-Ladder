@@ -1,9 +1,6 @@
 package ladder;
 
-import model.Direction;
-import model.ExceptionMessage;
-import model.NaturalNumber;
-import model.Node;
+import model.*;
 
 public class Row {
     private Node[] row;
@@ -16,17 +13,17 @@ public class Row {
         }
     }
 
-    public void drawLine(int lineStartPosition) {
+    public void drawLine(Position lineStartPosition) {
         validateDrawLinePosition(lineStartPosition);
-        row[lineStartPosition] = Node.of(Direction.RIGHT);
-        row[lineStartPosition + 1] = Node.of(Direction.LEFT);
+        row[lineStartPosition.getPosition()] = Node.of(Direction.RIGHT);
+        row[lineStartPosition.getPosition() + 1] = Node.of(Direction.LEFT);
     }
 
-    public int nextPosition(int position) {
+    public Position nextPosition(Position position) {
 
         validatePosition(position);
 
-        int nextPosition = row[position].move(position);
+        Position nextPosition = row[position.getPosition()].move(position);
 
         return nextPosition;
     }
@@ -45,14 +42,14 @@ public class Row {
 //        }
 //    }
 
-    private void validateDrawLinePosition(int lineStartPosition) {
-        if(lineStartPosition < 0 || lineStartPosition >= row.length - 1 || row[lineStartPosition].getDirection().getDirect() == -1 || row[lineStartPosition + 1].getDirection().getDirect() == 1) {
+    private void validateDrawLinePosition(Position lineStartPosition) {
+        if(lineStartPosition.getPosition() < 0 || lineStartPosition.getPosition() >= row.length - 1 || row[lineStartPosition.getPosition()].getDirection().getDirect() == -1 || row[lineStartPosition.getPosition() + 1].getDirection().getDirect() == 1) {
             throw new IllegalArgumentException(ExceptionMessage.IMPOSSIBLE_LOCATION_LINE.getExceptionMessage());
         }
     }
 
-    private void validatePosition(int position) {
-        if(position >= row.length || position < 0 ) {
+    private void validatePosition(Position position) {
+        if(position.getPosition() >= row.length || position.getPosition() < 0 ) {
             throw new IllegalArgumentException(ExceptionMessage.NOTVALIDATE_LOCATION.getExceptionMessage());
         }
     }

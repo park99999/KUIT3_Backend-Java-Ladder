@@ -15,20 +15,20 @@ public class Node {
         return direction;
     }
 
-    public int move(int position) {
-        if(isLeft(position)){
-            position += -1;
+    public Position move(Position position) {
+        if(isLeft()){
+            return position.move_left();
         }
-        if(isRight(position)){
-            position += 1;
+        if(isRight()){
+            return position.move_right();
         }
         return position;
     }
-    private boolean isLeft(int position) {
-        return direction.getDirect() == -1;
+    private boolean isLeft() {
+        return direction == Direction.LEFT;
     }
 
-    private boolean isRight(int position) {
-        return direction.getDirect() == 1;
+    private boolean isRight() {
+        return direction == Direction.RIGHT;
     }
 }
