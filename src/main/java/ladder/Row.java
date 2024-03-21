@@ -1,17 +1,21 @@
 package ladder;
 
+import model.Direction;
+import model.ExceptionMessage;
+import model.NaturalNumber;
+
 public class Row {
     private int[] row;
 
-    public Row(int numberOfPerson) {
-        validateNumberOfPerson(numberOfPerson);
-        row = new int[numberOfPerson];
+    public Row(NaturalNumber numberOfPerson) {
+        //validateNumberOfPerson(numberOfPerson); NaturalNmber에서 하니깐 생략 가능
+        row = new int[numberOfPerson.getNaturalNumber()];
     }
 
     public void drawLine(int lineStartPosition) {
         validateDrawLinePosition(lineStartPosition);
-        row[lineStartPosition] = 1;
-        row[lineStartPosition + 1] = -1;
+        row[lineStartPosition] = Direction.RIGHT.getDirect();
+        row[lineStartPosition + 1] = Direction.LEFT.getDirect();
     }
 
     public int nextPosition(int position) {
@@ -36,21 +40,21 @@ public class Row {
         return row[position] == 1;
     }
 
-    private void validateNumberOfPerson(int numberOfPerson) {
-        if(numberOfPerson < 1) {
-            throw new IllegalArgumentException("게임의 참여자 수는 1명 이상이어야 합니다.");
-        }
-    }
+//    private void validateNumberOfPerson(int numberOfPerson) {
+//        if(numberOfPerson < 1) {
+//            throw new IllegalArgumentException(ExceptionMessage.AT_LEAST_ONE.getExceptionMessage());
+//        }
+//    }
 
     private void validateDrawLinePosition(int lineStartPosition) {
         if(lineStartPosition < 0 || lineStartPosition >= row.length - 1 || row[lineStartPosition] == -1 || row[lineStartPosition + 1] == 1) {
-            throw new IllegalArgumentException("라인 생성이 불가능한 위치 입니다.");
+            throw new IllegalArgumentException(ExceptionMessage.IMPOSSIBLE_LOCATION_LINE.getExceptionMessage());
         }
     }
 
     private void validatePosition(int position) {
         if(position >= row.length || position < 0 ) {
-            throw new IllegalArgumentException("유효하지 않은 위치 입니다.");
+            throw new IllegalArgumentException(ExceptionMessage.NOTVALIDATE_LOCATION.getExceptionMessage());
         }
     }
 
