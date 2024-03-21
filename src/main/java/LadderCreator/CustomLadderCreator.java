@@ -1,16 +1,18 @@
-package ladder;
+package LadderCreator;
 
+import ladder.Row;
 import model.LadderPosition;
-import model.NaturalNumber;
+import model.LadderSize;
 import model.Position;
 
-public class LadderCreator {
-    private Row[] rows;
-
-    public LadderCreator(NaturalNumber numberOfRows, NaturalNumber numberOfPerson){
-        rows = new Row[numberOfPerson.getNaturalNumber()];
+public class CustomLadderCreator extends LadderCreator{
+    private final Row[] rows;
+    private final LadderSize ls;
+    public CustomLadderCreator(LadderSize ls){
+        this.ls = ls;
+        rows = new Row[ls.getRow().getNaturalNumber()];
         for(int i = 0; i < rows.length; i++) {
-            rows[i] = new Row(numberOfPerson);
+            rows[i] = new Row(ls.getPersons());
         }
     }
     public String createStringLadder(LadderPosition lp){
@@ -20,10 +22,14 @@ public class LadderCreator {
         }
         return sb.toString();
     }
+
+    @Override
     public void drawLine(Position row, Position col) {
         rows[row.getPosition()].drawLine(col);
     }
-    public Row[] getRows(){
+
+    @Override
+    public Row[] getRows() {
         return rows;
     }
 }

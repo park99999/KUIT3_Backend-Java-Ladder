@@ -1,6 +1,7 @@
 package ladder;
 
-import model.NaturalNumber;
+import LadderCreator.*;
+import model.LadderSize;
 import model.Position;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +13,7 @@ class LadderTest {
     void 사다리_생성_확인() {
         //given
         //when
-        LadderCreator ladder  = new LadderCreator(NaturalNumber.of(3), NaturalNumber.of(5));
+        LadderCreator ladder  = new CustomLadderCreator(LadderSize.InttoLadderSize(3,5));
 
         //then
         assertNotNull(ladder);
@@ -21,7 +22,7 @@ class LadderTest {
     @Test
     void 사다리_시작위치_예외_처리() {
         //given
-        LadderCreator ladder = new LadderCreator(NaturalNumber.of(3), NaturalNumber.of(1));
+        LadderCreator ladder = new CustomLadderCreator(LadderSize.InttoLadderSize(3,1));
         LadderGame ladderGame = new LadderGame(ladder);
         //when
         int position = 3;
@@ -33,7 +34,7 @@ class LadderTest {
     @Test
     void 사다리_결과_확인() {
         //given
-        LadderCreator ladder = new LadderCreator(NaturalNumber.of(4), NaturalNumber.of(4));
+        LadderCreator ladder = new CustomLadderCreator(LadderSize.InttoLadderSize(4,4));
         ladder.drawLine(Position.of(1),Position.of(0));
         ladder.drawLine(Position.of(1),Position.of(2));
         ladder.drawLine(Position.of(2),Position.of(1));
