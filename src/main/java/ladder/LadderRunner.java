@@ -1,5 +1,6 @@
 package ladder;
 
+import model.LadderPosition;
 import model.Position;
 
 public class LadderRunner {
@@ -15,7 +16,9 @@ public class LadderRunner {
     public Position run(Position position) {
 
         for(int i = 0; i < lc.getRows().length; i++) {
+            System.out.println(lc.createStringLadder(LadderPosition.of(position,Position.of(i))));
             position = lc.getRows()[i].nextPosition(position);
+            System.out.println(lc.createStringLadder(LadderPosition.of(position,Position.of(i))));
         }
 
         return position;

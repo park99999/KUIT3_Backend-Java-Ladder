@@ -27,7 +27,17 @@ public class Row {
 
         return nextPosition;
     }
-
+    public String createRowString(LadderPosition lp,int currentRow){
+        StringBuilder sb = new StringBuilder();
+        for (int i =0; i< row.length; i ++){
+            sb.append(row[i].getDirection().getDirect());
+            if(currentRow == lp.getCol().getPosition() && i == lp.getRow().getPosition()){
+                sb.append('*');
+            }
+            sb.append(' ');
+        }
+        return sb.toString();
+    }
 //    private boolean isLeft(int position) {
 //        return row[position] == -1;
 //    }
