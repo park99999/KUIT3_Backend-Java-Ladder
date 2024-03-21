@@ -3,42 +3,41 @@ package ladder;
 import model.Direction;
 import model.ExceptionMessage;
 import model.NaturalNumber;
+import model.Node;
 
 public class Row {
-    private int[] row;
+    private Node[] row;
 
     public Row(NaturalNumber numberOfPerson) {
         //validateNumberOfPerson(numberOfPerson); NaturalNmber에서 하니깐 생략 가능
-        row = new int[numberOfPerson.getNaturalNumber()];
+        row = new Node[numberOfPerson.getNaturalNumber()];
+        for (int i =0; i< numberOfPerson.getNaturalNumber(); i ++){
+            row[i]= Node.of(Direction.CENTER);
+        }
     }
 
     public void drawLine(int lineStartPosition) {
         validateDrawLinePosition(lineStartPosition);
-        row[lineStartPosition] = Direction.RIGHT.getDirect();
-        row[lineStartPosition + 1] = Direction.LEFT.getDirect();
+        row[lineStartPosition] = Node.of(Direction.RIGHT);
+        row[lineStartPosition + 1] = Node.of(Direction.LEFT);
     }
 
     public int nextPosition(int position) {
 
         validatePosition(position);
 
-        if (isLeft(position)) {
-            return position - 1;
-        }
-        if (isRight(position)) {
-            return position + 1;
-        }
+        int nextPosition = row[position].move(position);
 
-        return position;
+        return nextPosition;
     }
 
-    private boolean isLeft(int position) {
-        return row[position] == -1;
-    }
-
-    private boolean isRight(int position) {
-        return row[position] == 1;
-    }
+//    private boolean isLeft(int position) {
+//        return row[position] == -1;
+//    }
+//
+//    private boolean isRight(int position) {
+//        return row[position] == 1;
+//    }
 
 //    private void validateNumberOfPerson(int numberOfPerson) {
 //        if(numberOfPerson < 1) {
@@ -47,7 +46,7 @@ public class Row {
 //    }
 
     private void validateDrawLinePosition(int lineStartPosition) {
-        if(lineStartPosition < 0 || lineStartPosition >= row.length - 1 || row[lineStartPosition] == -1 || row[lineStartPosition + 1] == 1) {
+        if(lineStartPosition < 0 || lineStartPosition >= row.length - 1 || row[lineStartPosition].getDirection().getDirect() == -1 || row[lineStartPosition + 1].getDirection().getDirect() == 1) {
             throw new IllegalArgumentException(ExceptionMessage.IMPOSSIBLE_LOCATION_LINE.getExceptionMessage());
         }
     }
